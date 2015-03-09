@@ -139,36 +139,6 @@ class _ApplicationManagementKeywords(KeywordGroup):
         """
         self._current_application().get(url)
         
-    def keyevent(self, keycode, metastate=None):
-        """Sends a keycode to the device. Android only. Possible keycodes can be
-        found in http://developer.android.com/reference/android/view/KeyEvent.html.
-
-        :Args:
-         - keycode - the keycode to be sent to the device
-         - metastate - meta information about the keycode being sent
-        """
-        self._current_application().keyevent(keycode, metastate)
-        
-    def press_keycode(self, keycode, metastate=None):
-         """Sends a keycode to the device. Android only. Possible keycodes can be
-        found in http://developer.android.com/reference/android/view/KeyEvent.html.
-
-        :Args:
-         - keycode - the keycode to be sent to the device
-         - metastate - meta information about the keycode being sent
-        """
-         self._current_application().press_keycode(keycode, metastate)
-
-    def long_press_keycode(self, keycode, metastate=None):
-        """Sends a long press of keycode to the device. Android only. Possible keycodes can be
-        found in http://developer.android.com/reference/android/view/KeyEvent.html.
-
-        :Args:
-         - keycode - the keycode to be sent to the device
-         - metastate - meta information about the keycode being sent
-        """
-        self._current_application().long_press_keycode(keycode, metastate)
-        
     def execute_script(self, script):
         """Executes javascript"""
         self._current_application().execute_script(script)
