@@ -90,7 +90,7 @@ class _ElementKeywords(KeywordGroup):
         self._info("Current page contains text '%s'." % text)
 
     def page_should_not_contain_text(self, text, loglevel='INFO'):
-        """Verifies that current page not contains `text`.
+        """Verifies that current page does not contain `text`.
 
         If this keyword fails, it automatically logs the page source
         using the log level specified with the optional `loglevel` argument.
@@ -99,8 +99,8 @@ class _ElementKeywords(KeywordGroup):
         if text in self.log_source(loglevel):
             self.log_source(loglevel)
             raise AssertionError("Page should not have contained text '%s' "
-                                 "but did not" % text)
-        self._info("Current page does not contains text '%s'." % text)
+                                 "but did" % text)
+        self._info("Current page does not contain text '%s'." % text)
 
     def page_should_contain_element(self, locator, loglevel='INFO'):
         """Verifies that current page contains `locator` element.
@@ -125,8 +125,8 @@ class _ElementKeywords(KeywordGroup):
         if self._is_element_present(locator):
             self.log_source(loglevel)
             raise AssertionError("Page should not have contained element '%s' "
-                                 "but did not" % locator)            
-        self._info("Current page not contains element '%s'." % locator)
+                                 "but did" % locator)            
+        self._info("Current page does not contain element '%s'." % locator)
 
     def element_should_be_disabled(self, locator):
         """Verifies that element identified with locator is disabled.
@@ -137,7 +137,7 @@ class _ElementKeywords(KeywordGroup):
         if self._element_find(locator, True, True).is_enabled():
             self.log_source(loglevel)
             raise AssertionError("Element '%s' should be disabled "
-                                 "but did not" % locator)      
+                                 "but was not" % locator)      
         self._info("Element '%s' is disabled ." % locator)
 
     def element_should_be_enabled(self, locator):
@@ -149,7 +149,7 @@ class _ElementKeywords(KeywordGroup):
         if not self._element_find(locator, True, True).is_enabled():
             self.log_source(loglevel)
             raise AssertionError("Element '%s' should be enabled "
-                                 "but did not" % locator)      
+                                 "but was not" % locator)      
         self._info("Element '%s' is enabled ." % locator)
 
 
@@ -157,7 +157,7 @@ class _ElementKeywords(KeywordGroup):
         element = self._element_find(locator, True, True)
         if expected != element.get_attribute('name'):
             raise AssertionError("Element '%s' name should be '%s' "
-                                 "but it is '%s'." % (locator, expected, element.get_attribute('name'))) 
+                                 "but is '%s'." % (locator, expected, element.get_attribute('name'))) 
         self._info("Element '%s' name is '%s' " % (locator, expected))
 
 
