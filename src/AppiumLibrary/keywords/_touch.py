@@ -52,9 +52,25 @@ class _TouchKeywords(KeywordGroup):
         long_press = TouchAction(driver).long_press(element)
         long_press.perform() 
 
-    def tap(self, locator):
+    def tap_element(self, locator):
         """ Tap on element """
         driver = self._current_application()
         el = self._element_find(locator, True, True)
         action = TouchAction(driver)
         action.tap(el).perform()
+        
+    def tap(self, x, y, duration=None):
+        """
+        Taps the location of the given coordinates. If the coordinates
+        entered are decimal values, they are interpreted as percentages of
+        the screen width and height."""
+        driver = self._current_application()
+        window_size = driver.get_window_size()
+        x = float(x)
+        y = float(y)
+        if (x < 1):
+            x = round(x*float(window_size['width']))
+        if (y < 1):
+            y = round(y*float(window_size['height']))
+        self._info("Tapping coordinates: %d, %d." % (x, y))
+        driver.tap([(x,y)], duration)
