@@ -138,7 +138,54 @@ class _ApplicationManagementKeywords(KeywordGroup):
         | Go To URL         | http://m.webapp.com          |
         """
         self._current_application().get(url)
+        
+    def keyevent(self, keycode, metastate=None):
+        """Sends a keycode to the device. Android only. Possible keycodes can be
+        found in http://developer.android.com/reference/android/view/KeyEvent.html.
 
+        :Args:
+         - keycode - the keycode to be sent to the device
+         - metastate - meta information about the keycode being sent
+        """
+        self._current_application().keyevent(keycode, metastate)
+        
+    def press_keycode(self, keycode, metastate=None):
+         """Sends a keycode to the device. Android only. Possible keycodes can be
+        found in http://developer.android.com/reference/android/view/KeyEvent.html.
+
+        :Args:
+         - keycode - the keycode to be sent to the device
+         - metastate - meta information about the keycode being sent
+        """
+         self._current_application().press_keycode(keycode, metastate)
+
+    def long_press_keycode(self, keycode, metastate=None):
+        """Sends a long press of keycode to the device. Android only. Possible keycodes can be
+        found in http://developer.android.com/reference/android/view/KeyEvent.html.
+
+        :Args:
+         - keycode - the keycode to be sent to the device
+         - metastate - meta information about the keycode being sent
+        """
+        self._current_application().long_press_keycode(keycode, metastate)
+        
+    def execute_script(self, script):
+        """Executes javascript"""
+        self._current_application().execute_script(script)
+
+    def get_screen_width(self):
+        """Returns the width of the screen in pixels as an int"""
+        driver = self._current_application()
+        window_size = driver.get_window_size()
+        self._info("Screen width is: %d" % (window_size['width']))
+        return int(window_size['width'])
+    
+    def get_screen_height(self):
+        """Returns the height of the screen in pixels as an int"""
+        driver = self._current_application()
+        window_size = driver.get_window_size()
+        self._info("Screen height is: %d" % (window_size['height']))
+        return int(window_size['height'])
     # Private
 
     def _current_application(self):
