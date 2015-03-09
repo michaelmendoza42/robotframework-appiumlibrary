@@ -54,14 +54,42 @@ class _ElementKeywords(KeywordGroup):
         self._info("Typing password into text field '%s'" % locator)
         self._element_input_text_by_locator(locator, text)
 
-    def input_value(self, locator, text):
-        """Sets the given value into text field identified by `locator`. This is an IOS only keyword, input value makes use of set_value
-
-        See `introduction` for details about locating elements.
+    def set_value(self, locator, value):
+        """iOS only. Sets the value of the field directly (does not use keyboard)."""
+        el = self._element_find(locator, True, True)
+        self._current_application().set_value(el, value)
+        
+    def get_value(self,locator, attr="value"):
+        """Returns the value attribute of element identified by `locator`.
         """
-        self._info("Setting text '%s' into text field '%s'" % (text, locator))
-        self._element_input_value_by_locator(locator, text)
+        element = self._element_find(locator)
+        return (element.get_attribute(attr)).strip()
 
+    def get_text(self, locator):
+        element = self._element_find(locator)
+        text = element.text
+        return text
+
+    def select_dropdown(self, locator, value, by="text"):
+        """
+        Browser only
+        Select option from dropdown list. Valid options for "by" include
+        text, value, and index. Text is the default
+        Ex:
+        
+        | Select Dropdown | xpath=//*[@id="makeCode"] | Honda | |
+        | Select Dropdown | xpath=//*[@id="makeCode"] | MN | value |
+        """
+        element = Select(self._element_find(locator))
+        if (by.lower() == "text"):
+            element.select_by_visible_text(value)
+        elif (by.lower() == "value"):
+            element.select_by_value(value)
+        elif (by.lower() == "index"):
+            element.select_by_index(value)
+        else: 
+            raise AssertionError("Valid argument for by is index, value, and text. Got '%s'" % (by))
+            
     def reset_application(self):
         """ Reset application """
         driver = self._current_application()
@@ -159,6 +187,11 @@ class _ElementKeywords(KeywordGroup):
             raise AssertionError("Element '%s' name should be '%s' "
                                  "but is '%s'." % (locator, expected, element.get_attribute('name'))) 
         self._info("Element '%s' name is '%s' " % (locator, expected))
+        
+	def send_keys(self, element, value):
+	    el = self._element_find(element)
+        #values array starts at 0
+        el.send_keys(str(value))
 
 
     # Private
