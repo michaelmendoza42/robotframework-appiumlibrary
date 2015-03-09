@@ -32,3 +32,13 @@ class _KeyeventKeywords(KeywordGroup):
         """
         driver = self._current_application()
         driver.long_press_keycode(int(keycode), metastate)
+
+    def key_event(self, keycode, metastate=None):
+        """Sends a keycode to the device. Android only. Possible keycodes can be
+        found in http://developer.android.com/reference/android/view/KeyEvent.html.
+
+        :Args:
+         - keycode - the keycode to be sent to the device
+         - metastate - meta information about the keycode being sent
+        """
+        self._current_application().keyevent(keycode, metastate)
