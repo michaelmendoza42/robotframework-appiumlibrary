@@ -1,5 +1,18 @@
 History
 =======
+MM 2.0
+---------------
++ get_value
++ set_value (iOS)
++ get_screen_width
++ get_screen_height
+/ tap to tap_element
++ tap (coordinates or percent position)
++ key_event (Android)
++ send_keys
++ get_dropdown (Browser)
++ get_text (Browser)
+
 1.2.5
 ----------------
 - `Droid Utils: new file/folder handling methods <https://github.com/jollychang/robotframework-appiumlibrary/pull/31>`_
