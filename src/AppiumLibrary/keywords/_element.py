@@ -287,7 +287,7 @@ class _ElementKeywords(KeywordGroup):
         except Exception, e:
             raise e
 
-    def _element_find(self, locator, first_only, required, tag=None):
+    def _element_find(self, locator, first_only=True, required=True, tag=None):
         application = self._current_application()
         elements = self._element_finder.find(application, locator, tag)
         if required and len(elements) == 0:
